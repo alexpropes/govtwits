@@ -1,4 +1,10 @@
 Govtwits::Application.routes.draw do
+  get "sessions/new"
+
+  get "sessions/create"
+
+  get "sessions/failure"
+
   get "static_pages/home"
 
   get "static_pages/help"
@@ -7,6 +13,10 @@ Govtwits::Application.routes.draw do
 
   get "static_pages/contact"
 
+  get   '/login', :to => 'sessions#new', :as => :login
+	match '/auth/:provider/callback', :to => 'sessions#create'
+	match '/auth/failure', :to => 'sessions#failure'
+	
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
